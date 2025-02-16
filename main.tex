@@ -1,0 +1,154 @@
+% ==== ページ関連設定
+\documentclass[b5j, twoside]{ltjsbook}
+\usepackage{mybook}
+
+% トンボをつける
+%   pdfbox PDF内にデジタルトンボを埋め込む
+% \usepackage[pdfbox]{gentombow}
+
+% 和文に原ノ味フォントを使う
+%   deluxe 多ウェイトを使えるようにする
+%   expert 仮名が良い感じになる
+%   scale  和文/欧文のサイズ=0.92...にする
+\usepackage[haranoaji, deluxe, expert, match]{luatexja-preset}
+
+% デフォルトフォントをゴシック体に
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+
+\setmainfont{Noto Serif}
+\setsansfont{Source Sans Pro}
+\setmonofont{Roboto Mono}
+
+% PDF-X/1aで出力
+% \begin{filecontents*}{\jobname.xmpdata}
+% \Title{ンゴシリーズ vol.1}
+% \end{filecontents*}
+% \usepackage[x-1a]{pdfx}
+
+% ==== 各種パッケージ
+\usepackage{graphicx} % 画像の挿入
+\usepackage{amsmath}  % 数式系
+\usepackage{xcolor}   % 色
+\usepackage{hyperref} % ハイパーリンク
+% \usepackage{mdframed}
+
+\usepackage{tcolorbox} % ソースコードの枠
+\tcbuselibrary{breakable} % tcolorbox内でページまたぎを有効にする
+
+% メインカラーを定義
+\renewcommand{\mybookmaincolor}{\color[cmyk]{0.80, 0.35, 0.22, 0}}
+
+\begin{document}
+
+\title{ンゴシリーズ vol.1}
+\author{情報工学同好会 総員 著}
+\date{\today}
+\maketitle
+
+\null
+\vfill
+
+この本ではオープンソースのフォントである原ノ味フォント, Source Sans Pro, Roboto Monoを利用しています。この場を借りて感謝申し上げます。
+
+\begin{tcolorbox}[breakable, colframe=black, sharp corners]
+    本文中にある会社名、製品名は各社の登録商標である可能性があります。本文では\copyright などの表記は行っていません。
+\end{tcolorbox}
+
+\vspace*{10mm}
+
+\tableofcontents
+
+
+\chapter{チャプター}
+
+本稿では、沼津高専にて全学生に配布されている学生証についてできるだけ開設する。また、学生証を用いたシステム開発の手助け等を目的として執筆している。%
+
+\section{セクション}
+
+本物は見せられないので忠実に再現した画像を用いる.\par
+
+% $255_{10}=$ \directlua{toHexString(2147483648)}\par
+
+\begin{figure}[htbp]
+    \centering
+    \caption{画像サンプル}
+    \includegraphics[width=85.60truemm]{front.png}
+    \label{fig:gakusei_front}
+\end{figure}
+
+フォントは数字部分はArial, 日本語部分はMS UI Gothicが使われていると思われる.
+
+サイズはクレジットカードなどと同じ53.98x85.60mmとなっている.
+\LaTeX が仕事をしていれば実寸大になっているはず.
+
+
+\begin{itemize}
+    \item 機械工学科
+          \begin{itemize}
+              \item 電気電子工学科
+                    \begin{itemize}
+                        \item 電子制御工学科
+                              \begin{itemize}
+                                  \item 制御情報工学科
+                                  \item 物質工学科
+                              \end{itemize}
+                    \end{itemize}
+          \end{itemize}
+\end{itemize}
+
+定積分の定義は以下のようになります多分。
+
+\begin{equation*}
+    \int_a^b f(x) \,dx = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*) \Delta x_i
+\end{equation*}
+
+\clearpage
+
+\subsection{サブセクション}
+
+\subsubsection{サブサブセクション}
+
+ここに \texttt{inline code} が入ります。
+ここに \texttt{inline code}\ が入ります。
+
+以下がソースコードです。
+
+\begin{sourcecode}{これがキャプション}
+int main(void)
+{
+    // 日本語だよ
+    // This is comment!
+    printf("Hello world!");
+}
+\end{sourcecode}
+
+これがコールアウトです。
+\begin{note}
+    \texttt{\$ npm run dev}を実行しないと、処理が開始されません。必ず実行するようにしてください。
+\end{note}
+
+\begin{warn}
+    \texttt{\$ npm run dev}を実行しないと、処理が開始されません。必ず実行するようにしてください。
+\end{warn}
+
+\begin{caution}
+    \texttt{\$ npm run dev}を実行しないと、処理が開始されません。必ず実行するようにしてください。
+\end{caution}
+
+\appendix
+
+\chapter{彼女作るンゴ}
+
+\section{結論}
+
+無理。
+
+
+
+
+\newpage
+
+\end{document}
+
+

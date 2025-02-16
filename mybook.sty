@@ -1,0 +1,368 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mybook}[2025/02/09 nikachu]
+
+% ================================
+% 各種設定値の定義
+% ================================
+
+% 余白
+\def\topbottommargin{15truemm} % 上下の余白
+\def\nodomargin{25truemm} % ノドの余白
+\def\kogutimargin{15truemm} % 小口の余白
+\newcommand{\mybookBleedSize}{3truemm} % 塗り足しの幅
+\setlength{\footskip}{28pt}
+
+% セクション
+\newcommand{\mybooksecfont}{\sffamily\gtfamily\bfseries}
+\newcommand{\mybooksubsubsecicon}{\small▶} % subsubsectionのアイコン(デフォルトでは右向き三角形)
+
+% 色の定義
+% 必ずCMYKを使用すること
+\usepackage{xcolor}   % 色
+\definecolor{mybooksourcebg}{cmyk}{0, 0, 0, 0.02} % ソースコードの背景
+\definecolor{mybooksourceborder}{cmyk}{0, 0, 0, 0.4} % ソースコード枠
+
+\definecolor{mybookmaincolor}{cmyk}{0.80, 0.35, 0.22, 0}
+\definecolor{mybookwarncolor}{cmyk}{0.35, 1, 0.85, 0.02}
+\definecolor{mybookcautioncolor}{cmyk}{0.36, 0.51, 1, 0}
+
+
+\newcommand{\mybookmaincolor}{\color{mybookmaincolor}} % 全体のアクセントカラー
+
+% ノンブルのスタイル
+\newcommand{\mybookNombreStyle}{\ttfamily\fontsize{8}{9}\selectfont}
+
+\usepackage{luacode} % Lua
+\begin{luacode*}
+    -- 32ビットパディングされた１６進文字列を返します
+    function mybook_toHexString(number)
+    tex.sprint(string.format("0x%08x", number))
+    end
+\end{luacode*}
+\newcommand{\mybookNombreSecondLine}{\ttfamily\fontsize{8}{9}\selectfont\directlua{mybook_toHexString(\thepage)}}
+
+% 目次
+\newcommand{\mybooktoccolor}{\mybookmaincolor} % アクセント色
+
+% ソースコード
+% \renewcommand{\lstlistingname}{ソースコード}
+
+% キャプション
+
+
+
+% ================================
+% 余白の指定
+% ================================
+\usepackage{calc}
+
+\newlength{\vruledepth}% vruleの深さを定義(ノンブル真ん中から下)
+\setlength{\vruledepth}{\topbottommargin - \footskip + \mybookBleedSize}
+
+\setlength{\evensidemargin}{\kogutimargin - 1in}
+\setlength{\oddsidemargin}{\nodomargin - 1in}
+
+\setlength{\topmargin}{-1in} % 紙面の端から始めるようにする
+\addtolength{\topmargin}{(\topbottommargin - \headheight) / 2}
+
+\setlength{\headsep}{(\topbottommargin - \headheight) / 2}
+\setlength{\textwidth}{\paperwidth - \nodomargin - \kogutimargin}
+\setlength{\textheight}{\paperheight - \topbottommargin - \topbottommargin}
+
+
+% ================================
+% セクション
+% ================================
+\newcommand{\mybookhrulefill}[1]{\leavevmode\leaders\hrule height #1\hfill\kern\z@}
+\makeatletter
+
+% \chapter
+\def\@makechapterhead#1{%
+    \vspace*{0.5\Cvs}%
+    {%
+        \noindent%
+        \hskip3mm\parbox[b]{15truemm}{\Huge\mybooksecfont\thechapter\hfill}\hfill%
+        {\huge\mybooksecfont#1}%
+        \par\nobreak%
+    }%
+    {\noindent\makebox[\linewidth+\kogutimargin+\mybookBleedSize+1cm]{\mybookmaincolor\mybookhrulefill{0.8mm}}\par\nobreak}
+    {\vskip .5\Cvs}%
+    \thispagestyle{mycustom}%
+}
+
+% \chapter* 
+\def\@makeschapterhead#1{%
+    \vspace*{0.5\Cvs}%
+    {%
+        \noindent%
+        {\huge\mybooksecfont#1}%
+        \par\nobreak%
+    }%
+    {\noindent\makebox[\linewidth+\kogutimargin+\mybookBleedSize+1cm]{\mybookmaincolor\mybookhrulefill{0.8mm}}\par\nobreak}
+    {\vskip .5\Cvs}%
+    \thispagestyle{mycustom}%
+}
+
+% \renewcommand{\section}[1]{%
+%     \@startsection{section}{1}{\z@}%
+%     {\Cvs \@plus.5\Cdp \@minus.2\Cdp}% 前アキ
+%     {-1pt}% 後アキ
+%     {\normalfont\Large\mybooksecfont}\relax%
+%     {\noindent\mybooksecfont\Large#1\\}%
+%     {\vspace{-5pt}\mybookmaincolor\mybookhrulefill}
+% }
+
+% \section
+\renewcommand{\section}[1]{%
+    \@startsection{section}{1}{\z@}%
+    {1.5\Cvs}% 前アキ
+    {0.5\Cvs}% 後アキ
+    {%
+        {\mybookmaincolor\rule[-10pt]{2truemm}{1.8\Cvs}}%
+        \hspace*{8pt}%
+        \normalfont\Large\mybooksecfont%
+    }[#1]{#1}\relax%
+    {\vspace*{-1.5\Cwd}\noindent\mybookmaincolor\mybookhrulefill{0.4mm}}%
+    {\vskip 0.2\Cvs}%
+}
+
+% \subsection
+\renewcommand{\subsection}[1]{
+    \@startsection{subsection}{2}{\z@}%
+    {\Cvs \@plus.5\Cdp \@minus.2\Cdp}% 前アキ
+    {.4\Cvs}% 後アキ
+    {%
+        {\mybookmaincolor\rule[-8pt]{2truemm}{1.4\Cvs}}%
+        \hspace*{8pt}%
+        \normalfont\large\mybooksecfont
+    }[#1]{#1}\relax%
+    {\vspace*{-1.5\Cwd}\noindent\mybookmaincolor\mybookhrulefill{0.4mm}}%
+    {\vskip 0.2\Cvs}%
+}
+
+% \subsubsection
+\usepackage{amssymb}
+\renewcommand{\subsubsection}{%
+    \@startsection{subsubsection}{3}{\z@}%
+    {\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+    {\if@slide .5\Cvs \@plus.3\Cdp \else \z@ \fi}%
+    {%
+        \normalfont\normalsize\headfont%
+        {\mybookmaincolor\mybooksubsubsecicon}%
+        \hspace{2pt}\mybooksecfont%
+    }%
+}
+
+% ================================
+% ヘッダとフッタ(柱とノンブル)
+% ================================
+\newcommand{\ps@mycustom}{%
+    \renewcommand{\@oddhead}{% 左ページヘッダ
+        \relax%
+    }
+    \renewcommand{\@evenhead}{% 左ページヘッダ
+        \relax%
+    }
+    \renewcommand{\@oddfoot}{% 右ページフッタ
+        \hfill% 右揃え
+        \parbox[b]{30mm}{%
+            \hfill{\mybookNombreStyle\thepage}%
+            \@ifundefined{mybookNombreSecondLine}%
+            {\relax}% ノンブル2行目が未定義の時
+            {% ノンブル2行目が定義済みの時
+                \\%
+                \hfill\mybookNombreSecondLine%
+            }%
+        }%
+        {\hskip2mm\mybookmaincolor\vrule height 20pt depth \vruledepth width 0.4truemm}%
+    }
+    \renewcommand{\@evenfoot}{% 左ページフッタ
+        {\mybookmaincolor\vrule height 20pt depth \vruledepth width 0.4truemm\hskip2mm}%
+        \parbox[b]{30mm}{%
+            {\mybookNombreStyle\thepage}%
+            \@ifundefined{mybookNombreSecondLine}%
+            {\relax}% ノンブル2行目が未定義の時
+            {% ノンブル2行目が定義済みの時
+                \\%
+                \mybookNombreSecondLine%
+            }%
+        }%
+    }
+}
+\pagestyle{mycustom}
+
+
+% ================================
+% 目次
+% ================================
+
+% tableofcontents
+\renewcommand{\tableofcontents}{%
+    \settowidth\jsc@tocl@width{\headfont\prechaptername\postchaptername}%
+    \settowidth\@tempdima{\headfont\appendixname}%
+    \ifdim\jsc@tocl@width<\@tempdima \setlength\jsc@tocl@width{\@tempdima}\fi
+    \ifdim\jsc@tocl@width<2\zw \divide\jsc@tocl@width by 2 \advance\jsc@tocl@width 1\zw\fi
+    \if@twocolumn
+        \@restonecoltrue\onecolumn
+    \else
+        \@restonecolfalse
+    \fi
+    \chapter*{\contentsname}%
+    \@mkboth{\contentsname}{}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+}
+
+% 部
+\renewcommand*{\l@part}[2]{%
+    \ifnum \c@tocdepth >-2\relax
+        \addpenalty{-\@highpenalty}%
+        \addvspace{2.25em \@plus\jsc@mpt}%
+        {%
+            \parindent \z@
+            \rightskip \@tocrmarg
+            \parfillskip -\rightskip
+            {%
+                \leavevmode
+                \large \headfont
+                \setlength\@lnumwidth{4\zw}%
+                \bfseries\gtfamily% 太字にするため追加
+                #1\hfil \hb@xt@\@pnumwidth{\hss\mybooktoccolor#2}%
+            }\par
+            \nobreak
+            \global\@nobreaktrue
+            \everypar{\global\@nobreakfalse\everypar{}}%
+        }%
+    \fi%
+}
+
+% 章
+\renewcommand*{\l@chapter}[2]{%
+    \ifnum \c@tocdepth >\m@ne
+        \addpenalty{-\@highpenalty}%
+        \addvspace{1.0em \@plus\jsc@mpt}
+        {%
+            \parindent\z@
+            \rightskip\@tocrmarg
+            \parfillskip-\rightskip
+            \leavevmode\headfont
+            \setlength\@lnumwidth{\jsc@tocl@width}\advance\@lnumwidth 2.683\zw
+            \advance\leftskip\@lnumwidth \hskip-\leftskip
+            \bfseries\gtfamily% 太字にするために追加
+            #1\nobreak\hfil\nobreak\hbox to\@pnumwidth{\hss\mybooktoccolor#2}\par
+            \penalty\@highpenalty
+        }
+    \fi
+}
+
+% section以下
+\def\@dottedtocline#1#2#3#4#5{\ifnum #1>\c@tocdepth \else
+        \vskip \z@ \@plus.2\jsc@mpt
+        {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
+            \parindent #2\relax\@afterindenttrue
+            \interlinepenalty\@M
+            \leavevmode
+            \@lnumwidth #3\relax
+            \advance\leftskip \@lnumwidth \null\nobreak\hskip -\leftskip
+            {#4}\nobreak
+            {\mybooktoccolor\jsTocLine} \nobreak\hb@xt@\@pnumwidth{%
+                \hfil\normalfont \normalcolor \mybooktoccolor#5}\par}\fi}
+
+% ================================
+% itemize
+% ================================
+\renewcommand{\labelitemi}{\mybookmaincolor\bullet}
+\renewcommand{\labelitemii}{\normalfont\bfseries\mybookmaincolor \textendash}
+\renewcommand{\labelitemiii}{\mybookmaincolor\textasteriskcentered}
+\renewcommand{\labelitemiv}{\mybookmaincolor\textperiodcentered}
+
+% ================================
+% ソースコード
+% ================================
+\usepackage{listings,jvlisting}
+
+\lstset{
+    basicstyle={\ttfamily},
+    identifierstyle={\small},
+    commentstyle={\small\itshape},
+    keywordstyle={\small\bfseries},
+    ndkeywordstyle={\small},
+    stringstyle={\small\ttfamily},
+    breaklines=true,
+    columns=[l]{fullflexible},
+    numbers=left,
+    xrightmargin=0\zw,
+    xleftmargin=2\zw,
+    numberstyle={\footnotesize\bfseries\color{mybooksourceborder}},
+    stepnumber=1,
+    numbersep=1\zw,
+    lineskip=-0.4ex,
+}
+\renewcommand{\lstlistingname}{ソースコード}
+
+\usepackage{tcolorbox} % ソースコードの枠
+\tcbuselibrary{breakable} % tcolorbox内でページまたぎを有効にする
+
+\lstnewenvironment{sourcecode}{}{} % sourcecode環境を定義
+
+% sourcecode環境にtcolorboxを追加
+% (texdocのtcolorboxenvironmentを参照)
+\tcolorboxenvironment{sourcecode}{
+    top=-2mm,%
+    bottom=-2mm,%
+    left=0mm,%
+    right=4mm,%
+    colback=mybooksourcebg,%
+    colframe=mybooksourceborder,%
+    boxrule=1pt,%
+    breakable%
+}
+
+% \newcommand{kusacode}{%
+%     \begin{tcolorbox}[colback=black!0.02, colframe=black!0.20, boxrule=1pt, attach title to upper={\hfill}, fonttitle=\ttfamily, coltitle=purple, title=草]%
+%         kusa2%
+%     \end{tcolorbox}%
+% }
+
+
+% ================================
+% キャプション
+% ================================
+\long\def\@makecaption#1#2{%
+{%
+    \small
+    \advance\leftskip .0628\linewidth
+    \advance\rightskip .0628\linewidth
+    \vskip\abovecaptionskip
+    \sbox\@tempboxa{#1{\hskip1\zw}#2}%
+    \ifdim \wd\@tempboxa <\hsize \centering \fi
+    {\mybookmaincolor\bfseries\gtfamily#1}{\hskip1\zw}#2\par
+    \vskip\belowcaptionskip
+}%
+}
+
+% ================================
+% アラート
+% ================================
+% tcolorboxが必要です
+\newtcolorbox{note}{
+    title=参考,
+    fonttitle=\bfseries\gtfamily,
+    colframe=mybookmaincolor,
+    breakable
+}
+
+\newtcolorbox{warn}{
+    title=警告,
+    fonttitle=\bfseries\gtfamily,
+    colframe=mybookwarncolor,
+    breakable
+}
+
+\newtcolorbox{caution}{
+    title=注意,
+    fonttitle=\bfseries\gtfamily,
+    colframe=mybookcautioncolor,
+    breakable
+}
+\makeatother
