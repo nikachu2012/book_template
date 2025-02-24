@@ -47,9 +47,9 @@
 % ソースコード
 % \renewcommand{\lstlistingname}{ソースコード}
 
-% キャプション
 
 
+\makeatletter
 
 % ================================
 % 余白の指定
@@ -71,10 +71,50 @@
 
 
 % ================================
+% タイトルページ
+% ================================
+\renewcommand*{\date}[1]{\gdef\@date{#1}}
+
+\usepackage{siunitx}
+\sisetup{
+    text-family-to-math = true,
+    text-series-to-math = true
+}
+\gdef\@date{%
+    \ttfamily%
+    \num[minimum-integer-digits=4]{\number\year}-%
+    \num[minimum-integer-digits=2]{\number\month}-%
+    \num[minimum-integer-digits=2]{\number\day}%
+}
+
+\renewcommand{\maketitle}{%
+    \begin{titlepage}%
+        \parindent \z@
+        % \reset@font
+        \null\vfil
+        \begin{flushleft}
+            \mybooksecfont \Huge \@title
+        \end{flushleft}
+        \par
+        {\mybookmaincolor\hrule height 0.8mm}
+        \par
+        \begin{flushright}
+            \Large \@author \par
+        \end{flushright}
+        \vskip 60\p@
+        \vfil\null
+        \begin{flushright}
+            {\small \@date}%
+        \end{flushright}
+    \end{titlepage}%
+    \setcounter{footnote}{0}%
+}
+
+
+% ================================
 % セクション
 % ================================
 \newcommand{\mybookhrulefill}[1]{\leavevmode\leaders\hrule height #1\hfill\kern\z@}
-\makeatletter
 
 % \chapter
 \def\@makechapterhead#1{%
