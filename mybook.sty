@@ -204,8 +204,9 @@
         \relax%
     }
     \renewcommand{\@oddfoot}{% 右ページフッタ
+        \rightmark%
         \hfill% 右揃え
-        \parbox[b]{30mm}{%
+        \parbox[c]{30mm}{%
             \hfill{\mybookNombreStyle\thepage}%
             \@ifundefined{mybookNombreSecondLine}%
             {\relax}% ノンブル2行目が未定義の時
@@ -214,11 +215,11 @@
                 \hfill\mybookNombreSecondLine%
             }%
         }%
-        {\hskip2mm\mybookmaincolor\vrule height 20pt depth \vruledepth width 0.4truemm}%
+        {\hskip2mm\mybookmaincolor\vrule height 16pt depth \vruledepth width 0.4truemm}%
     }
     \renewcommand{\@evenfoot}{% 左ページフッタ
-        {\mybookmaincolor\vrule height 20pt depth \vruledepth width 0.4truemm\hskip2mm}%
-        \parbox[b]{30mm}{%
+        {\mybookmaincolor\vrule height 16pt depth \vruledepth width 0.4truemm\hskip2mm}%
+        \parbox[c]{30mm}{%
             {\mybookNombreStyle\thepage}%
             \@ifundefined{mybookNombreSecondLine}%
             {\relax}% ノンブル2行目が未定義の時
@@ -227,8 +228,31 @@
                 \mybookNombreSecondLine%
             }%
         }%
+        \hfill%
+        \leftmark%
     }
+    \def\chaptermark##1{%
+        \markboth{%
+            \ifnum \c@secnumdepth >\m@ne%
+                \if@mainmatter%
+                    \if@omit@number\else%
+                        {\mybookmaincolor\sffamily\gtfamily\bfseries\thechapter}\hskip1\zw%
+                    \fi%
+                \fi%
+            \fi%
+            ##1%
+        }{}%
+    }%
+    \def\sectionmark##1{%
+        \markright{%
+            \ifnum \c@secnumdepth >\z@%
+                {\mybookmaincolor\sffamily\gtfamily\bfseries\thesection}\hskip1\zw%
+            \fi%
+            ##1%
+        }%
+    }%
 }
+
 \pagestyle{mycustom}
 
 
