@@ -125,6 +125,7 @@
 
 % \chapter
 \def\@makechapterhead#1{%
+    {\setlength\parskip{\z@}%
     \vspace*{0.5\Cvs}%
     {%
         \noindent%
@@ -133,12 +134,13 @@
         \par\nobreak%
     }%
     {\noindent\makebox[\linewidth+\kogutimargin+\mybookBleedSize+1cm]{\mybookmaincolor\mybookhrulefill{0.8mm}}\par\nobreak}
-    {\vskip .5\Cvs}%
-    \thispagestyle{mycustom}%
+    % {\vskip .5\Cvs}%
+    \thispagestyle{mycustom}}%
 }
 
 % \chapter* 
 \def\@makeschapterhead#1{%
+    {\setlength\parskip{\z@}%
     \vspace*{0.5\Cvs}%
     {%
         \noindent%
@@ -146,8 +148,8 @@
         \par\nobreak%
     }%
     {\noindent\makebox[\linewidth+\kogutimargin+\mybookBleedSize+1cm]{\mybookmaincolor\mybookhrulefill{0.8mm}}\par\nobreak}
-    {\vskip .5\Cvs}%
-    \thispagestyle{mycustom}%
+    % {\vskip .5\Cvs}%
+    \thispagestyle{mycustom}}%
 }
 
 % \renewcommand{\section}[1]{%
@@ -161,6 +163,7 @@
 
 % \section
 \renewcommand{\section}[1]{%
+    {\setlength\parskip{\z@}%
     \@startsection{section}{1}{\z@}%
     {1.5\Cvs}% 前アキ
     {0.5\Cvs}% 後アキ
@@ -170,11 +173,12 @@
         \normalfont\Large\mybooksecfont%
     }[#1]{#1}\relax%
     {\vspace*{-1.5\Cwd}\noindent\mybookmaincolor\mybookhrulefill{0.4mm}}%
-    {\vskip 0.2\Cvs}%
+    {\vskip 0.2\Cvs}}%
 }
 
 % \subsection
 \renewcommand{\subsection}[1]{
+    {\setlength\parskip{\z@}%
     \@startsection{subsection}{2}{\z@}%
     {\Cvs \@plus.5\Cdp \@minus.2\Cdp}% 前アキ
     {.4\Cvs}% 後アキ
@@ -184,16 +188,17 @@
         \normalfont\large\mybooksecfont
     }[#1]{#1}\relax%
     {\vspace*{-1.5\Cwd}\noindent\mybookmaincolor\mybookhrulefill{0.4mm}}%
-    {\vskip 0.2\Cvs}%
+    {\vskip 0.2\Cvs}}%
 }
 
 % \subsubsection
 \usepackage{amssymb}
 \renewcommand{\subsubsection}{%
     \@startsection{subsubsection}{3}{\z@}%
-    {\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
-    {\if@slide .5\Cvs \@plus.3\Cdp \else \z@ \fi}%
+    {0.5\Cvs \@plus.3\Cdp \@minus.1\Cdp}%
+    {\z@}%
     {%
+        \setlength\parskip{\z@}%
         \normalfont\normalsize\headfont%
         {\mybookmaincolor\mybooksubsubsecicon}%
         \hspace{2pt}\mybooksecfont%
