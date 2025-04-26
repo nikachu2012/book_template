@@ -388,6 +388,7 @@
 
 \usepackage{tcolorbox} % ソースコードの枠
 \tcbuselibrary{breakable} % tcolorbox内でページまたぎを有効にする
+\tcbuselibrary{skins}
 
 \lstnewenvironment{sourcecode}{}{} % sourcecode環境を定義
 
@@ -401,7 +402,21 @@
     colback=mybooksourcebg,%
     colframe=mybooksourceborder,%
     boxrule=1pt,%
-    breakable%
+    breakable,%
+    enhanced,
+}
+
+\newenvironment{codebox}{}{}
+\tcolorboxenvironment{codebox}{
+    top=-2mm,%
+    bottom=-2mm,%
+    left=0mm,%
+    right=4mm,%
+    colback=mybooksourcebg,%
+    colframe=mybooksourceborder,%
+    boxrule=1pt,%
+    breakable,%
+    enhanced,
 }
 
 % \newcommand{kusacode}{%
