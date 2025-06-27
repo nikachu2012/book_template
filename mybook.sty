@@ -168,14 +168,14 @@
     {\setlength\parskip{\z@}%
     \@startsection{section}{1}{\z@}%
     {\z@}% 前アキ
-    {0.5\Cvs}% 後アキ
+    {0.4\Cvs}% 後アキ
     {%
-        {\mybookmaincolor\rule[-10pt]{2truemm}{1.8\Cvs}}%
+        \noindent{\mybookmaincolor\rule[-9pt]{2truemm}{1.9\Cvs}}%
         \hspace*{8pt}%
         \normalfont\Large\mybooksecfont%
     }[#1]{#1}\relax%
     {\vspace*{-1.5\Cwd}\noindent\mybookmaincolor\mybookhrulefill{0.4mm}}%
-    {\vskip 0.1\Cvs}}%
+    {\vskip -0.1\Cvs}}%
 }
 
 % \subsection
@@ -184,20 +184,20 @@
     {\setlength\parskip{\z@}%
     \@startsection{subsection}{2}{\z@}%
     {\z@}% 前アキ
-    {.4\Cvs}% 後アキ
+    {4pt}% 後アキ
     {%
-        {\mybookmaincolor\rule[-8pt]{2truemm}{1.4\Cvs}}%
+        \noindent{\mybookmaincolor\rule[-7pt]{2truemm}{1.5\Cvs}}%
         \hspace*{8pt}%
         \normalfont\large\mybooksecfont
     }[#1]{#1}\relax%
     {\vspace*{-1.5\Cwd}\noindent\mybookmaincolor\mybookhrulefill{0.4mm}}%
-    {\vskip 0.1\Cvs}}%
+    {\vskip -0.1\Cvs}}%
 }
 
 % \subsubsection
 \usepackage{amssymb}
 \renewcommand{\subsubsection}{%
-    \vspace{0.5\Cvs \@plus.3\Cdp \@minus.1\Cdp}
+    \vspace{2ex}
     \@startsection{subsubsection}{3}{\z@}%
     {\z@}%
     {\z@}%
