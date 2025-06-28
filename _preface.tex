@@ -1,0 +1,43 @@
+\documentclass[main.tex]{subfiles}
+\graphicspath{{image/}}
+
+\begin{document}
+
+\chapter*{はじめに}
+\addcontentsline{toc}{chapter}{はじめに}
+
+まずはこの本をお手に取っていただきありがとうございます。
+この本をお手に取っていただけるような人の家には、大体AVRマイコンが使われたArduinoがあると思います。
+
+% \begin{figure}[H]
+%     \centering
+%     \caption{AVRチップが搭載されたArduinoいろいろ}
+%     \includegraphics[width=0.5\linewidth]{prologue.png}
+%     \label{fig:prologue_arduino}
+% \end{figure}
+
+AVRマイコンというのはAtmel社(現在はMicrochip社)の開発する8bitマイコンのことです。
+このAVRマイコンにピンヘッダやUSBシリアル変換モジュール等をつけ便利に使えるようにしたのがArduinoです。
+
+AVRマイコンに限らず8bitマイコンの機械語は命令数が少なくわかりやすいです。そのため、CPUの構造やアセンブラを初めて学ぶには最適だと思います。
+中でもAVRマイコンは\url{AVR.jp}にて日本語のデータシートや命令一覧が公開されているのでおすすめです。
+
+私は高専生ですが、先生が以下のような言葉を言っていました。
+
+\begin{verse}
+    {\bfseries 楽しちゃダメだから}\\
+    某高専の某先生 - 2023
+\end{verse}
+
+C++等の高級な言語を使うのも楽しいですが、楽せずアセンブラを用いてCPUの中身についての理解を深めるのも良いと思います。
+
+この本では最初にCPUを実現するための回路を簡単に解説したあと、AVR CPUの構造を解説します。
+その後、実際にアセンブラーや書き込みソフトをインストールし、Arduinoでよくあるプログラムをアセンブリで記述します。プログラムはArduino UNO R3で動作確認しています。
+
+この本ではAND, OR, NOT等の論理回路の知識があることを前提に話を進めます。
+一応なくても大丈夫だとは思いますが、ウェブサイト等で論理回路やフリップフロップについて学んでから読むといろいろつながって面白いと思います。
+\begin{flushright}
+    2025-03-16T23:29:37+09:00\;\;nikachu
+\end{flushright}
+
+\end{document}

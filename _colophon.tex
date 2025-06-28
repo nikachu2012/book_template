@@ -1,0 +1,41 @@
+\documentclass[main.tex]{subfiles}
+\graphicspath{{image/}}
+
+\begin{document}
+\clearpage
+
+\thispagestyle{empty}
+
+\null
+\vfill
+
+\begin{tabular*}{\textwidth}{l}
+    \noindent
+    {\sffamily\bfseries\Large \makeatletter\@title\makeatother}\vspace{3mm} \\ 
+    \hline
+    \begin{tabular}{@{}rrrl}
+        \ifthenelse{\boolean{isPaperPublishing}}{%
+            2025年 & 5月 & 1日 & 初版第1刷発行 \\
+        }{%
+            2025年 & 5月 & 1日 & 電子書籍版 v1.0 \\%
+        }
+        % 2025年 & 5月 & 1日 & 初版第1刷発行 \\
+        % 2029年 & 1月 & 1日 & 初版第2刷発行
+    \end{tabular} \\
+    \\
+    \begin{tabular}{@{}ll}
+        \textbf{著者} & nikachu（\texttt{@nikachu2012}） \\
+        \textbf{発行者} & \begin{tabular}{@{}l@{}}
+                            荻野\;壮（\texttt{@nikachu2012}） \\
+                            \texttt{work@nikachu.net}
+                         \end{tabular} \\
+        \textbf{発行所} & nikatech（\url{https://nikatech.nikachu.net}）\\
+        \textbf{印刷者} & 株式会社プリントパック \\
+        \textbf{頒価} & 500円 / \texttt{ISDN278-4-874195-01-4 C3055} \\
+    \end{tabular} \\
+    \hline
+    \copyright\;2025 nikachu / %
+    \ifthenelse{\boolean{isPaperPublishing}}{Printed in Japan\,(多分).}{PDF generated in Japan.}
+\end{tabular*}
+
+\end{document}
