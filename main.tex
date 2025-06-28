@@ -2,6 +2,11 @@
 \documentclass[b5j, twoside, 9pt]{ltjsbook}
 \usepackage{mybook}
 
+\newcommand{\mybooktitle}   {Arduinoで始めるアセンブリ}
+\newcommand{\mybooksubtitle}{アセンブリからマイコンの機能を使う}
+\newcommand{\mybookauthor}  {nikachu2012}
+\newcommand{\mybookkeywords}{Assembly, Assembler, Arduino, AVR, ATmega328P}
+
 % トンボをつける
 %   pdfbox PDF内にデジタルトンボを埋め込む
 % \usepackage[pdfbox]{gentombow}
@@ -24,12 +29,6 @@
 % 等幅フォント
 \setmonofont{Roboto Mono}
 
-% PDF-X/1aで出力
-% \begin{filecontents*}{\jobname.xmpdata}
-% \Title{ンゴシリーズ vol.1}
-% \end{filecontents*}
-% \usepackage[x-1a]{pdfx}
-
 % ==== 各種パッケージ
 \usepackage{graphicx} % 画像の挿入
 \usepackage{amsmath}  % 数式系
@@ -38,14 +37,26 @@
 \usepackage{tcolorbox} % ソースコードの枠
 \tcbuselibrary{breakable} % tcolorbox内でページまたぎを有効にする
 
+% ==== Hyperref
+\usepackage{hyperref} % ハイパーリンク hyperrefは最後にインポート必ず
+\hypersetup{%
+    bookmarksnumbered=true,%
+    bookmarkstype=toc,%
+    pdftitle={\mybooktitle},%
+    pdfsubject={\mybooksubtitle},%
+    pdfauthor={\mybookauthor},%
+    pdfkeywords={\mybookkeywords},%
+    hidelinks%
+}
+
 % メインカラーを定義
 \renewcommand{\mybookmaincolor}{\color[cmyk]{0.80, 0.35, 0.22, 0}}
 
 \begin{document}
 
-\title{ンゴシリーズ vol.1}
-\author{情報工学同好会 総員}
-% \date{\today}
+\title{\mybooktitle}
+\author{\mybookauthor}
+\date{}
 \maketitle
 
 \null
