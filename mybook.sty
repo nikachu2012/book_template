@@ -278,19 +278,22 @@
 
 % tableofcontents
 \renewcommand{\tableofcontents}{%
-    \settowidth\jsc@tocl@width{\headfont\prechaptername\postchaptername}%
-    \settowidth\@tempdima{\headfont\appendixname}%
-    \ifdim\jsc@tocl@width<\@tempdima \setlength\jsc@tocl@width{\@tempdima}\fi
-    \ifdim\jsc@tocl@width<2\zw \divide\jsc@tocl@width by 2 \advance\jsc@tocl@width 1\zw\fi
-    \if@twocolumn
-        \@restonecoltrue\onecolumn
-    \else
-        \@restonecolfalse
-    \fi
-    \chapter*{\contentsname}%
-    \@mkboth{\contentsname}{}%
-    \@starttoc{toc}%
-    \if@restonecol\twocolumn\fi
+    {%
+        \setlength{\parskip}{0.8ex plus 0.5ex minus 0.2ex}%
+        \settowidth\jsc@tocl@width{\headfont\prechaptername\postchaptername}%
+        \settowidth\@tempdima{\headfont\appendixname}%
+        \ifdim\jsc@tocl@width<\@tempdima \setlength\jsc@tocl@width{\@tempdima}\fi%
+        \ifdim\jsc@tocl@width<2\zw \divide\jsc@tocl@width by 2 \advance\jsc@tocl@width 1\zw\fi%
+        \if@twocolumn%
+            \@restonecoltrue\onecolumn%
+        \else%
+            \@restonecolfalse%
+        \fi%
+        \chapter*{\contentsname}%
+        \@mkboth{\contentsname}{}%
+        \@starttoc{toc}%
+        \if@restonecol\twocolumn\fi%
+    }%
 }
 
 % 部
