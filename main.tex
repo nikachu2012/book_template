@@ -6,19 +6,23 @@
 %   pdfbox PDF内にデジタルトンボを埋め込む
 % \usepackage[pdfbox]{gentombow}
 
-% 和文に原ノ味フォントを使う
+% 和文にヒラギノ角ゴ ProNを使う
 %   deluxe 多ウェイトを使えるようにする
 %   expert 仮名が良い感じになる
 %   scale  和文/欧文のサイズ=0.92...にする
-\usepackage[haranoaji, deluxe, expert, match]{luatexja-preset}
+\usepackage[hiragino-pron, deluxe, expert, match, scale]{luatexja-preset}
+% \usepackage[haranoaji, deluxe, expert, match]{luatexja-preset}
 
 % デフォルトフォントをゴシック体に
 \renewcommand{\familydefault}{\sfdefault}
 \renewcommand{\kanjifamilydefault}{\gtdefault}
 
-\setmainfont{Noto Serif}
-\setsansfont{Source Sans Pro}
-\setmonofont{Roboto Mono}[Scale=0.93]
+% 和文明朝フォント
+\setmainfont{Hiragino Mincho ProN}
+% 欧文フォント
+\setsansfont{Helvetica Neue}
+% 等幅フォント
+\setmonofont{Roboto Mono}
 
 % PDF-X/1aで出力
 % \begin{filecontents*}{\jobname.xmpdata}
