@@ -36,7 +36,7 @@
 \begin{luacode*}
     -- 32ビットパディングされた１６進文字列を返します
     function mybook_toHexString(number)
-    tex.sprint(string.format("0x%08x", number))
+    tex.sprint(string.format("0x%02x", number))
     end
 \end{luacode*}
 \newcommand{\mybookNombreSecondLine}{\ttfamily\fontsize{8}{9}\selectfont\directlua{mybook_toHexString(\thepage)}}
