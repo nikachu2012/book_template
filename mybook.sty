@@ -293,11 +293,24 @@
         \else%
             \@restonecolfalse%
         \fi%
-        \chapter*{\contentsname}%
+        \clearpage%
+        % \chapter*{\contentsname}%
+        % ここから目次のタイトル
+        {\setlength\parskip{\z@}%
+        \vspace*{0.5\Cvs}%
+        {%
+            \noindent%
+            {\huge\mybooksecfont\contentsname}%
+            \par\nobreak%
+        }%
+        {\noindent\hspace*{-\kogutimargin-\mybookBleedSize}\makebox[\linewidth+\kogutimargin+\mybookBleedSize]{\mybookmaincolor\mybookhrulefill{0.8mm}}\par\nobreak}
+        }%
+        % ここまで目次タイトル
         \@mkboth{\contentsname}{}%
         \@starttoc{toc}%
         \if@restonecol\twocolumn\fi%
     }%
+    \clearpage\null\thispagestyle{empty}\cleardoublepage%
 }
 
 % 部
