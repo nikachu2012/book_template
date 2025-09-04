@@ -493,4 +493,15 @@
     colframe=mybookcautioncolor,
     breakable
 }
+
+% ================================
+% ref
+% ================================
+\newcommand{\mypageref}[1]{%
+    {\bfseries\mybookmaincolor ページ\pageref{#1}}%
+}
+
+\newcommand{\myref}[2]{%
+    {\bfseries\mybookmaincolor {#1}\ref{#2}}%
+}
 \makeatother
