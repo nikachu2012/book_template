@@ -115,20 +115,19 @@
 \tableofcontents
 
 
-\chapter{チャプター}
+\chapter{チャプター}\label{chapter}
 
-本稿では、沼津高専\footnote{独立行政法人\;国立高等専門学校機構\;沼津工業高等専門学校}にて全学生に配布されている学生証についてできるだけ開設する。また、学生証を用いたシステム開発の手助け等を目的として執筆している。%
+本稿では、沼津高専\footnote{独立行政法人\;国立高等専門学校機構\;沼津工業高等専門学校}にて全学生に配布されている学生証についてできるだけ開設する。
+また、学生証を用いたシステム開発の手助け等を目的として執筆している。%
 
 \section{セクション}
 
 本物は見せられないので忠実に再現した画像を用いる.\par
 
-% $255_{10}=$ \directlua{toHexString(2147483648)}\par
-
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
-    \caption{画像サンプル}
     \includegraphics[width=85.60truemm]{image/front.png}
+    \caption{画像サンプル}
     \label{fig:gakusei_front}
 \end{figure}
 
@@ -137,6 +136,7 @@
 サイズはクレジットカードなどと同じ53.98x85.60mmとなっている.
 \LaTeX が仕事をしていれば実寸大になっているはず.
 
+pagerefは、\mypageref{chapter}、refは\myref{章}{chapter}のように表す
 
 \begin{itemize}
     \item 機械工学科
@@ -152,24 +152,30 @@
           \end{itemize}
 \end{itemize}
 
+\begin{description}
+    \item[これがdescriptionのタイトル]
+    これが内容
+    \item[\ttfamily I: 全割り込み許可]\mbox{}\\
+    改行する時はこんな感じ
+\end{description}
+
+\clearpage
+
 定積分の定義は以下のようになります多分。
 
 \begin{equation*}
     \int_a^b f(x) \,dx = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*) \Delta x_i
 \end{equation*}
 
-\clearpage
-
 \subsection{サブセクション}
 
 \subsubsection{サブサブセクション}
 
 ここに \texttt{inline code} が入ります。
-ここに \texttt{inline code}\ が入ります。
 
 以下がソースコードです。
 
-\begin{sourcecode}{これがキャプション}
+\begin{sourcecode}
 int main(void)
 {
     // 日本語だよ
@@ -179,11 +185,10 @@ int main(void)
 \end{sourcecode}
 
 以下のように書くとファイルからソースコードを表示できます。
-\begin{sourcecode}
+
 \begin{codebox}
-    \lstinputlisting[]{source/serial_out.asm}
+    \lstinputlisting[]{sourcecode/test.cpp}
 \end{codebox}
-\end{sourcecode}
 
 \clearpage
 
@@ -200,10 +205,15 @@ int main(void)
     \texttt{\$ npm run dev}を実行しないと、処理が開始されません。必ず実行するようにしてください。
 \end{caution}
 
-\begin{description}
-    \item[これがdescriptionのタイトル]
-    これが内容
-\end{description}
+\texttt{simplebox}環境は以下のように使います
+
+\begin{simplebox}
+\textbf{関数 \texttt{llvm::IRBuilderBase::CreateRet}}
+\tcblower
+\begin{verbatim}
+ReturnInst *CreateRet(Value *V)
+\end{verbatim}
+\end{simplebox}
 
 \appendix
 
