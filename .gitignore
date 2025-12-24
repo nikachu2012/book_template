@@ -1,3 +1,7 @@
+## OS dump file
+.DS_Store
+Thumbs.db
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
