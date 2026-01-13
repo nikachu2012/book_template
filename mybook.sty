@@ -397,8 +397,57 @@
 % ================================
 \usepackage{listings,jvlisting}
 
-\lstset{
-    basicstyle={\ttfamily},
+% \lstset{
+%     basicstyle={\small\ttfamily},
+%     identifierstyle={},
+%     commentstyle={\itshape},
+%     keywordstyle={\bfseries},
+%     ndkeywordstyle={},
+%     stringstyle={},
+%     breaklines=true,
+%     columns=[l]{fullflexible},
+%     numbers=left,
+%     xrightmargin=0\zw,
+%     xleftmargin=2\zw,
+%     numberstyle={\footnotesize\bfseries\color{mybooksourceborder}},
+%     stepnumber=1,
+%     numbersep=1\zw,
+%     lineskip=0.1ex,
+%     keepspaces=true
+% }
+% \renewcommand{\lstlistingname}{ソースコード}
+
+% \usepackage{tcolorbox} % ソースコードの枠
+% \tcbuselibrary{breakable} % tcolorbox内でページまたぎを有効にする
+% \tcbuselibrary{skins}
+
+% \lstnewenvironment{sourcecode}{}{} % sourcecode環境を定義
+
+% % sourcecode環境にtcolorboxを追加
+% % (texdocのtcolorboxenvironmentを参照)
+% \tcolorboxenvironment{sourcecode}{
+%     top=-2mm,%
+%     bottom=-2mm,%
+%     left=0mm,%
+%     right=4mm,%
+%     colback=mybooksourcebg,%
+%     colframe=mybooksourceborder,%
+%     boxrule=1pt,%
+%     breakable,%
+%     enhanced,
+% }
+
+% --- 必要なパッケージ ---
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, listings}
+
+\renewcommand{\lstlistingname}{ソースコード}
+
+% ==========================================
+% 1. listingsの設定を「スタイル」として分離定義
+% ==========================================
+\lstdefinestyle{mySourceStyle}{
+    basicstyle={\small\ttfamily},
     identifierstyle={},
     commentstyle={\itshape},
     keywordstyle={\bfseries},
@@ -415,27 +464,51 @@
     lineskip=0.1ex,
     keepspaces=true
 }
-\renewcommand{\lstlistingname}{ソースコード}
 
-\usepackage{tcolorbox} % ソースコードの枠
-\tcbuselibrary{breakable} % tcolorbox内でページまたぎを有効にする
-\tcbuselibrary{skins}
+\lstset{style=mySourceStyle}
 
-\lstnewenvironment{sourcecode}{}{} % sourcecode環境を定義
-
-% sourcecode環境にtcolorboxを追加
-% (texdocのtcolorboxenvironmentを参照)
-\tcolorboxenvironment{sourcecode}{
-    top=-2mm,%
-    bottom=-2mm,%
-    left=0mm,%
-    right=4mm,%
-    colback=mybooksourcebg,%
-    colframe=mybooksourceborder,%
-    boxrule=1pt,%
-    breakable,%
+\newtcblisting[auto counter, number within=chapter]{sourcecode}[2][]{%
+    % --- タイトルの設定 ---
+    % 「ソースコード 番号 : キャプション」の形式にする
+    title={\small{\mybookmaincolor\bfseries\gtfamily\lstlistingname~\thetcbcounter}{\hskip1\zw}#2},
+    % --- デザイン設定 ---
+    coltitle=black,
+    colback=mybooksourcebg,
+    colframe=mybooksourceborder,
+    boxrule=1pt,
+    breakable,
     enhanced,
+    top=-2mm,
+    bottom=-2mm,
+    left=0mm,
+    right=4mm,
+    attach boxed title to bottom center={yshift=-3pt},
+    boxed title style={enhanced jigsaw, colback=white, sharp corners, boxrule=0pt, bottom=5pt},
+    % --- listings 設定 ---
+    listing only,
+    listing style=mySourceStyle,
+    % --- ユーザオプション（labelなど） ---
+    #1
 }
+
+\newtcblisting[]{sourcecode*}[1][]{%
+    coltitle=black,
+    colback=mybooksourcebg,
+    colframe=mybooksourceborder,
+    boxrule=1pt,
+    breakable,
+    enhanced,
+    top=-2mm,
+    bottom=-2mm,
+    left=0mm,
+    right=4mm,
+    % --- listings 設定 ---
+    listing only,
+    listing style=mySourceStyle,
+    % --- ユーザオプション（labelなど） ---
+    #1
+}
+
 
 \newenvironment{codebox}{}{}
 \tcolorboxenvironment{codebox}{
